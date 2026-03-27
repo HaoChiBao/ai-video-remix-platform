@@ -2,6 +2,7 @@
   "name": "2embed-api",
   "version": "1.0.0",
   "description": "api",
+  "packageManager": "pnpm@10.22.0",
   "main": "dist/server.js",
   "scripts": {
     "build": "tsc",
