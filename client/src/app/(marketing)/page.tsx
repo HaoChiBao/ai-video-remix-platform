@@ -1,0 +1,20 @@
+import { HomeContent } from "./home-content";
+import { browsePoolFromHome, catalogFromHome, fetchHomeCatalog } from "@/lib/api/home-service";
+
+export default async function HomePage() {
+  const home = await fetchHomeCatalog();
+
+  if (!home) {
+    return <HomeContent featured={null} trending={[]} communityPicks={[]} />;
+  }
+
+  const { featured, trending, communityPicks } = catalogFromHome(home);
+  const pool = browsePoolFromHome(home);
+  return (
+    <HomeContent
+      featured={featured}
+      trending={trending.length ? trending : pool.slice(0, 16)}
+      communityPicks={communityPicks.length ? communityPicks : pool.slice(0, 8)}
+    />
+  );
+}
