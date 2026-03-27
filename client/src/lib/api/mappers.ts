@@ -2,6 +2,7 @@ import type { ContentRating, Episode, Movie, Show } from "@/types";
 import type {
   TmdbMovieDetails,
   TmdbMovieListItem,
+  TmdbMultiSearchItem,
   TmdbTvDetails,
 } from "./tmdb-types";
 
@@ -30,6 +31,15 @@ const TMDB_GENRE_MAP: Record<number, string> = {
   10765: "Sci-Fi & Fantasy",
   10768: "War & Politics",
 };
+
+/** Sorted genre filters for search/browse UI (TMDB ids). */
+export const TMDB_GENRE_OPTIONS = (Object.entries(TMDB_GENRE_MAP) as [string, string][])
+  .map(([id, name]) => ({ id: Number(id), name }))
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+export function genreNameFromTmdbId(id: number): string | undefined {
+  return TMDB_GENRE_MAP[id];
+}
 
 export const TMDB_IMAGE = "https://image.tmdb.org/t/p";
 
@@ -88,6 +98,14 @@ export function tmdbListItemToMovie(
     trending: opts?.trending,
     isNew: opts?.isNew,
   };
+}
+
+/** Map TMDB `/search/multi` result to a catalog item; skips people. */
+export function tmdbMultiResultToContent(item: TmdbMultiSearchItem): Movie | Show | null {
+  if (item.media_type === "person") return null;
+  if (item.media_type === "movie") return tmdbListItemToMovie(item);
+  if (item.media_type === "tv") return tmdbListItemToShow(item);
+  return null;
 }
 
 export function tmdbListItemToShow(

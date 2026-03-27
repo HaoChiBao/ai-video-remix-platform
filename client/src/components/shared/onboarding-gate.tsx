@@ -16,7 +16,7 @@ import { Label } from "@/components/ui/label";
 import { siteConfig } from "@/config/site";
 import { genreOptions } from "@/lib/data/filters";
 
-const KEY = "cobalt-stream-onboarding";
+const KEY = "wtfdidiwatch-onboarding";
 
 export function OnboardingGate() {
   const [open, setOpen] = useState(false);
@@ -44,7 +44,7 @@ export function OnboardingGate() {
 
   return (
     <Dialog open={open} onOpenChange={(v) => !v && dismiss()}>
-      <DialogContent className="max-w-lg border-white/10 bg-[#0a2760] text-left sm:max-w-lg">
+      <DialogContent className="max-w-lg border-white/20 bg-[#050505] text-left sm:max-w-lg">
         <DialogHeader>
           <DialogTitle className="font-heading text-2xl text-white">
             Welcome to {siteConfig.name}

@@ -95,7 +95,7 @@ export function ClipDetailClient({
             </Button>
           </div>
 
-          <div className="rounded-xl border border-white/10 bg-card/40 p-4">
+          <div className="rounded-sm border border-white/20 bg-card/40 p-4">
             <h2 className="font-heading text-sm font-semibold text-white">AI-generated labeling</h2>
             <p className="mt-2 text-sm text-[var(--muted-foreground)]">
               When a clip uses our assisted workflow, we show an{" "}
@@ -105,13 +105,13 @@ export function ClipDetailClient({
           </div>
         </div>
 
-        <Card className="w-full border-white/10 bg-[#0a2760]/80 lg:max-w-sm">
+        <Card className="w-full border-white/20 bg-card/60 lg:max-w-sm">
           <CardContent className="p-5">
             <p className="text-xs font-medium uppercase tracking-wide text-[var(--muted-foreground)]">
               Creator
             </p>
             <div className="mt-4 flex items-center gap-3">
-              <Avatar className="size-12 border border-white/10">
+              <Avatar className="size-12 border border-white/20">
                 <AvatarImage src={clip.creatorAvatarUrl} alt="" />
                 <AvatarFallback>{clip.creatorName.slice(0, 2)}</AvatarFallback>
               </Avatar>
@@ -133,7 +133,7 @@ export function ClipDetailClient({
             <p className="text-sm text-[var(--muted-foreground)]">No comments yet.</p>
           ) : (
             comments.map((c) => (
-              <div key={c.id} className="rounded-lg border border-white/10 bg-white/5 p-4">
+              <div key={c.id} className="rounded-sm border border-white/20 bg-white/5 p-4">
                 <p className="text-sm font-medium text-white">{c.authorName}</p>
                 <p className="mt-1 text-sm text-[var(--muted-foreground)]">{c.body}</p>
               </div>

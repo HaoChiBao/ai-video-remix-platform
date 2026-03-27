@@ -13,7 +13,7 @@ function Fallback() {
   return (
     <div className="mx-auto max-w-[960px] space-y-6 px-4 py-8 sm:px-6">
       <Skeleton className="h-10 w-64" />
-      <Skeleton className="h-[400px] w-full rounded-2xl" />
+      <Skeleton className="h-[400px] w-full rounded-sm" />
     </div>
   );
 }

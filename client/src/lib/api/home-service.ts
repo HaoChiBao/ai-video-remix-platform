@@ -16,6 +16,7 @@ export function catalogFromHome(data: HomeApiResponse): {
   trending: (Movie | Show)[];
   popular: (Movie | Show)[];
   communityPicks: (Movie | Show)[];
+  recommendations: (Movie | Show)[];
 } {
   const trending = [
     ...data.trending_movies.map((m) => tmdbListItemToMovie(m, { trending: true })),
@@ -37,11 +38,24 @@ export function catalogFromHome(data: HomeApiResponse): {
       ? tmdbListItemToMovie(data.popular_movies[0], { isNew: true })
       : trending[0] ?? popular[0] ?? null;
 
+  const movieRecs = (data.movie_recommendations ?? []).map((m) => tmdbListItemToMovie(m));
+  const tvRecs = (data.tv_recommendations ?? []).map((t) => tmdbListItemToShow(t));
+  const seenRec = new Set<string>();
+  const recommendations: (Movie | Show)[] = [];
+  for (const item of [...movieRecs, ...tvRecs]) {
+    if (seenRec.has(item.id)) continue;
+    seenRec.add(item.id);
+    if (featured && item.id === featured.id) continue;
+    recommendations.push(item);
+    if (recommendations.length >= 24) break;
+  }
+
   return {
     featured,
     trending,
     popular,
     communityPicks,
+    recommendations,
   };
 }
 

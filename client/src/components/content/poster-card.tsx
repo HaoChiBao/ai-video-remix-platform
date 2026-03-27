@@ -26,7 +26,7 @@ export function PosterCard({ item, className }: PosterCardProps) {
     >
       <Link
         href={`/title/${item.id}`}
-        className="block overflow-hidden rounded-xl border border-white/10 bg-card shadow-lg outline-none ring-offset-2 ring-offset-[#002060] transition focus-visible:ring-2 focus-visible:ring-[var(--electric-aqua)]"
+        className="block overflow-hidden rounded-sm border border-white/20 bg-card shadow-lg outline-none ring-offset-2 ring-offset-black transition focus-visible:ring-2 focus-visible:ring-[var(--electric-aqua)]"
       >
         <div className="relative aspect-[2/3] w-full overflow-hidden">
           <Image

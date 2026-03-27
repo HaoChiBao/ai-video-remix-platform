@@ -22,7 +22,7 @@ export function FeaturedCard({ item, className }: FeaturedCardProps) {
       initial={reduce ? false : { opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, ease: "easeOut" }}
-      className={cn("relative overflow-hidden rounded-2xl border border-white/10 shadow-2xl", className)}
+      className={cn("relative overflow-hidden rounded-sm border border-white/20 shadow-xl shadow-black/50", className)}
     >
       <div className="relative aspect-[21/9] min-h-[280px] w-full sm:min-h-[320px]">
         <Image
@@ -33,7 +33,7 @@ export function FeaturedCard({ item, className }: FeaturedCardProps) {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#002060]/95 via-[#002060]/55 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/55 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
 
         <div className="absolute bottom-0 left-0 right-0 flex flex-col justify-end gap-4 p-6 sm:p-10 md:max-w-[60%]">

@@ -93,7 +93,7 @@ export function BrowseClient({ initialTitles }: { initialTitles: (Movie | Show)[
         description="Filter movies and shows from the catalog loaded from your API server."
       />
 
-      <div className="mb-6 flex flex-col gap-4 rounded-xl border border-white/10 bg-card/50 p-4 backdrop-blur-sm lg:flex-row lg:items-end">
+      <div className="mb-6 flex flex-col gap-4 rounded-sm border border-white/20 bg-card/50 p-4 backdrop-blur-sm lg:flex-row lg:items-end">
         <div className="grid flex-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-2">
             <Label htmlFor="browse-q">Search</Label>
@@ -222,7 +222,7 @@ export function BrowseClient({ initialTitles }: { initialTitles: (Movie | Show)[
       {loading ? (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {Array.from({ length: 10 }).map((_, i) => (
-            <Skeleton key={i} className="aspect-[2/3] w-full rounded-xl" />
+            <Skeleton key={i} className="aspect-[2/3] w-full rounded-sm" />
           ))}
         </div>
       ) : filtered.length === 0 ? (

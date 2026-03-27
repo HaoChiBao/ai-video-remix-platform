@@ -1,8 +1,8 @@
 export const siteConfig = {
-  name: "Cobalt Stream",
+  name: "WTFdidiwatch",
   tagline: "Discover. Watch. Remix with AI.",
   description:
-    "A premium streaming community for licensed content, clips, and AI-assisted segments.",
+    "A sharp, dark streaming hub for titles, clips, and AI-assisted segments.",
   nav: [
     { href: "/", label: "Home" },
     { href: "/browse", label: "Browse" },

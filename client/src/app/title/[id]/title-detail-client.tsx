@@ -23,12 +23,11 @@ import type { Clip } from "@/types";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { VideoPlayerShell } from "@/components/player/video-player-shell";
-import { PlaybackSettingsPanel } from "@/components/player/playback-settings-panel";
 import { TvEpisodePicker } from "@/components/player/tv-episode-picker";
 import { defaultVidkingOptions } from "@/config/player";
 import { parseTmdbTitleId } from "@/lib/api/details-service";
 import { fetchTvSeasonEpisodes, type TvSeasonEpisodeRow } from "@/lib/api/episodes-client";
-import { buildVidkingMovieUrl, buildVidkingTvUrl, type VidkingPlayerOptions } from "@/lib/api/vidking-embed";
+import { buildVidkingMovieUrl, buildVidkingTvUrl } from "@/lib/api/vidking-embed";
 
 function sortClips(list: Clip[], sort: string) {
   const next = [...list];
@@ -55,12 +54,6 @@ export function TitleDetailClient({
   const clips = getClipsByTitleId(title.id);
   const [clipSort, setClipSort] = useState("views");
   const [clipFilter, setClipFilter] = useState<"all" | "ai" | "human">("all");
-
-  const [vidkingOverrides, setVidkingOverrides] = useState<Partial<VidkingPlayerOptions>>({});
-  const vidkingOpts = useMemo(
-    () => ({ ...defaultVidkingOptions, ...vidkingOverrides }),
-    [vidkingOverrides],
-  );
 
   const playbackParsed = useMemo(() => parseTmdbTitleId(title.id), [title.id]);
   const tvSeasons = useMemo(() => {
@@ -150,15 +143,15 @@ export function TitleDetailClient({
   const effectiveEmbedUrl = useMemo(() => {
     if (!playbackParsed) return embedUrl ?? null;
     if (playbackParsed.media === "movie") {
-      return buildVidkingMovieUrl(playbackParsed.tmdbId, vidkingOpts);
+      return buildVidkingMovieUrl(playbackParsed.tmdbId, defaultVidkingOptions);
     }
     return buildVidkingTvUrl(
       playbackParsed.tmdbId,
       resolvedSeason,
       episode,
-      vidkingOpts,
+      defaultVidkingOptions,
     );
-  }, [playbackParsed, embedUrl, resolvedSeason, episode, vidkingOpts]);
+  }, [playbackParsed, embedUrl, resolvedSeason, episode]);
 
   const visibleClips = useMemo(() => {
     let list = clips;
@@ -180,7 +173,7 @@ export function TitleDetailClient({
 
   return (
     <div>
-      <div className="relative min-h-[420px] w-full overflow-hidden border-b border-white/10">
+      <div className="relative min-h-[420px] w-full overflow-hidden border-b border-white/20">
         <Image
           src={title.backdropUrl}
           alt=""
@@ -189,9 +182,9 @@ export function TitleDetailClient({
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#002060] via-[#002060]/75 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
         <div className="relative mx-auto flex max-w-[1400px] flex-col gap-6 px-4 pb-12 pt-24 sm:px-6 md:flex-row md:items-end md:gap-10">
-          <div className="relative h-64 w-48 shrink-0 overflow-hidden rounded-xl border border-white/15 shadow-2xl shadow-black/40 sm:h-80 sm:w-52">
+          <div className="relative h-64 w-48 shrink-0 overflow-hidden rounded-sm border border-white/25 shadow-xl shadow-black/50 sm:h-80 sm:w-52">
             <Image
               src={title.posterUrl}
               alt={title.title}
@@ -257,34 +250,17 @@ export function TitleDetailClient({
         id="player"
         className="mx-auto max-w-[1400px] scroll-mt-24 space-y-4 px-4 pb-6 sm:px-6"
       >
-        {playbackParsed ? (
-          playbackParsed.media === "tv" && tvSeasons.length > 0 ? (
-            <div className="grid gap-4 lg:grid-cols-2 lg:items-start">
-              <PlaybackSettingsPanel
-                kind="tv"
-                value={vidkingOpts}
-                onChange={(patch) => setVidkingOverrides((o) => ({ ...o, ...patch }))}
-                onReset={() => setVidkingOverrides({})}
-              />
-              <TvEpisodePicker
-                seasons={title.kind === "show" ? title.seasons : []}
-                resolvedSeason={resolvedSeason}
-                onSeasonChange={handleSeasonChange}
-                episode={episode}
-                onEpisodeChange={handleEpisodeChange}
-                apiEpisodes={apiEpisodes}
-                episodesLoading={episodesLoading}
-                fallbackEpisodeCount={episodeCount}
-              />
-            </div>
-          ) : (
-            <PlaybackSettingsPanel
-              kind={playbackParsed.media === "tv" ? "tv" : "movie"}
-              value={vidkingOpts}
-              onChange={(patch) => setVidkingOverrides((o) => ({ ...o, ...patch }))}
-              onReset={() => setVidkingOverrides({})}
-            />
-          )
+        {playbackParsed && playbackParsed.media === "tv" && tvSeasons.length > 0 ? (
+          <TvEpisodePicker
+            seasons={title.kind === "show" ? title.seasons : []}
+            resolvedSeason={resolvedSeason}
+            onSeasonChange={handleSeasonChange}
+            episode={episode}
+            onEpisodeChange={handleEpisodeChange}
+            apiEpisodes={apiEpisodes}
+            episodesLoading={episodesLoading}
+            fallbackEpisodeCount={episodeCount}
+          />
         ) : null}
 
         <VideoPlayerShell
@@ -328,7 +304,7 @@ export function TitleDetailClient({
                     s.episodes.map((ep) => (
                       <li
                         key={ep.id}
-                        className="flex flex-wrap items-center justify-between gap-4 rounded-lg border border-white/10 bg-card/40 px-4 py-3"
+                        className="flex flex-wrap items-center justify-between gap-4 rounded-sm border border-white/20 bg-card/40 px-4 py-3"
                       >
                         <div>
                           <p className="font-medium text-white">
@@ -348,7 +324,7 @@ export function TitleDetailClient({
                   {title.seasons.map((s) => (
                     <li
                       key={s.seasonNumber}
-                      className="flex flex-wrap items-center justify-between gap-4 rounded-lg border border-white/10 bg-card/40 px-4 py-3"
+                      className="flex flex-wrap items-center justify-between gap-4 rounded-sm border border-white/20 bg-card/40 px-4 py-3"
                     >
                       <p className="font-medium text-white">Season {s.seasonNumber}</p>
                       <span className="text-sm text-[var(--aurora-glow)]">
@@ -361,7 +337,7 @@ export function TitleDetailClient({
                 <p className="text-sm text-[var(--muted-foreground)]">No season data for this title.</p>
               )
             ) : (
-              <div className="flex items-start gap-3 rounded-lg border border-white/10 bg-card/30 p-4">
+              <div className="flex items-start gap-3 rounded-sm border border-white/20 bg-card/30 p-4">
                 <Info className="mt-0.5 size-5 shrink-0 text-[var(--electric-aqua)]" />
                 <p className="text-sm text-[var(--muted-foreground)]">
                   This is a feature film. Explore related community clips in the Community clips

@@ -55,6 +55,15 @@ export type HomeApiResponse = {
   popular_tv: TmdbMovieListItem[];
   top_movies: TmdbMovieListItem[];
   top_tv: TmdbMovieListItem[];
+  /** TMDB `/movie/{id}/recommendations` for top popular movie. */
+  movie_recommendations?: TmdbMovieListItem[];
+  /** TMDB `/tv/{id}/recommendations` for top popular TV show. */
+  tv_recommendations?: TmdbMovieListItem[];
+};
+
+/** TMDB search/multi item (movie, tv, or person). */
+export type TmdbMultiSearchItem = TmdbMovieListItem & {
+  media_type?: "movie" | "tv" | "person";
 };
 
 export type DetailsApiResponse = {
@@ -63,6 +72,16 @@ export type DetailsApiResponse = {
 };
 
 export type SearchApiResponse = {
-  results: TmdbMovieListItem[];
+  results: TmdbMovieListItem[] | TmdbMultiSearchItem[];
+  page?: number;
+  total_pages?: number;
+  total_results?: number;
   available?: boolean;
+};
+
+export type DiscoverApiResponse = {
+  results: TmdbMovieListItem[];
+  page: number;
+  total_pages: number;
+  total_results: number;
 };
