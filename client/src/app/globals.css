@@ -4,7 +4,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Vibrant Cobalt — brand primitives */
+/* Brand blues — accents on a black base */
 :root {
   --deep-cobalt: #002060;
   --vibrant-cobalt: #0047ab;
@@ -59,16 +59,16 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-xl: calc(var(--radius) * 1.25);
+  --radius-2xl: calc(var(--radius) * 1.5);
+  --radius-3xl: calc(var(--radius) * 1.75);
+  --radius-4xl: calc(var(--radius) * 2);
 }
 
-/* Light fallback (marketing); app uses `.dark` on html */
+/* Light fallback; app uses `.dark` on html */
 :root {
   --background: var(--polar-white);
   --foreground: var(--deep-cobalt);
@@ -93,7 +93,7 @@
   --chart-3: var(--aurora-glow);
   --chart-4: var(--skyline-blue);
   --chart-5: var(--slate-gray);
-  --radius: 0.75rem;
+  --radius: 0.5rem;
   --sidebar: #f0f4ff;
   --sidebar-foreground: var(--deep-cobalt);
   --sidebar-primary: var(--vibrant-cobalt);
@@ -105,37 +105,50 @@
 }
 
 .dark {
-  --background: #002060;
-  --foreground: #ffffff;
-  --card: #0a2760;
-  --card-foreground: #f8fbff;
-  --popover: #0c2a6b;
-  --popover-foreground: #f8fbff;
+  --background: #030303;
+  --foreground: #f5f5f5;
+  --card: #0a0a0a;
+  --card-foreground: #f0f0f0;
+  --popover: #0a0a0a;
+  --popover-foreground: #f0f0f0;
   --primary: #0047ab;
   --primary-foreground: #ffffff;
-  --secondary: #123a8a;
-  --secondary-foreground: #e8f0ff;
-  --muted: #163a82;
-  --muted-foreground: #a8bddc;
-  --accent: #00ffff;
-  --accent-foreground: #002060;
+  --secondary: #0f1a2e;
+  --secondary-foreground: #e0e8f4;
+  --muted: #141414;
+  --muted-foreground: #9aa8bc;
+  --accent: #0d1f4a;
+  --accent-foreground: #87ceeb;
   --destructive: oklch(0.62 0.2 25);
-  --border: color-mix(in oklch, #ffffff 14%, transparent);
-  --input: color-mix(in oklch, #ffffff 18%, transparent);
+  --border: color-mix(in oklch, #ffffff 22%, transparent);
+  --input: color-mix(in oklch, #ffffff 26%, transparent);
   --ring: #4169e1;
   --chart-1: #00ffff;
   --chart-2: #4169e1;
   --chart-3: #87ceeb;
   --chart-4: #0047ab;
   --chart-5: #6a7b8d;
-  --sidebar: #061a4a;
+  --radius: 0.1875rem;
+  --sidebar: #050505;
   --sidebar-foreground: #f0f6ff;
   --sidebar-primary: #0047ab;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #0d2f78;
+  --sidebar-accent: #0d1f4a;
   --sidebar-accent-foreground: #e8f0ff;
-  --sidebar-border: color-mix(in oklch, #ffffff 12%, transparent);
+  --sidebar-border: color-mix(in oklch, #ffffff 20%, transparent);
   --sidebar-ring: #4169e1;
+}
+
+@keyframes metallic-glow-drift {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: translate(2%, -1%) scale(1.02);
+  }
 }
 
 @layer base {
@@ -143,16 +156,53 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply relative isolate bg-background text-foreground antialiased;
     background-image: radial-gradient(
-        ellipse 120% 80% at 50% -20%,
-        color-mix(in oklch, var(--skyline-blue) 35%, transparent),
-        transparent 55%
+        ellipse 100% 60% at 50% -15%,
+        color-mix(in oklch, var(--skyline-blue) 18%, transparent),
+        transparent 50%
       ),
-      linear-gradient(180deg, #002060 0%, #001848 55%, #000814 100%);
+      linear-gradient(180deg, #050508 0%, #020202 45%, #000000 100%);
   }
   html.dark body {
     background-attachment: fixed;
+  }
+  html.dark body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: linear-gradient(
+        155deg,
+        rgba(255, 255, 255, 0.045) 0%,
+        transparent 38%,
+        rgba(255, 255, 255, 0.02) 52%,
+        transparent 68%,
+        rgba(65, 105, 225, 0.06) 100%
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 2px,
+        rgba(255, 255, 255, 0.012) 2px,
+        rgba(255, 255, 255, 0.012) 3px
+      );
+    opacity: 0.85;
+  }
+  html.dark body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    background: radial-gradient(
+      ellipse 55% 40% at 70% 20%,
+      rgba(255, 255, 255, 0.06),
+      transparent 65%
+    );
+    animation: metallic-glow-drift 22s ease-in-out infinite;
   }
   html {
     @apply font-sans;

@@ -148,7 +148,7 @@ export function CreateClient({ catalogTitles }: { catalogTitles: (Movie | Show)[
           animate={{ opacity: 1, y: 0 }}
           exit={reduceMotion ? undefined : { opacity: 0, y: -6 }}
           transition={{ duration: 0.22 }}
-          className="rounded-2xl border border-white/10 bg-card/50 p-6 shadow-xl backdrop-blur-sm"
+          className="rounded-sm border border-white/20 bg-card/50 p-6 shadow-xl backdrop-blur-sm"
         >
           {session.step === 1 && (
             <div className="space-y-4">
@@ -167,7 +167,7 @@ export function CreateClient({ catalogTitles }: { catalogTitles: (Movie | Show)[
                     type="button"
                     onClick={() => selectContent(t.id)}
                     className={cn(
-                      "flex gap-3 rounded-xl border p-3 text-left transition hover:border-[var(--electric-aqua)]/50",
+                      "flex gap-3 rounded-sm border p-3 text-left transition hover:border-[var(--electric-aqua)]/50",
                       session.selectedContentId === t.id
                         ? "border-[var(--electric-aqua)] bg-white/10"
                         : "border-white/10 bg-white/5",
@@ -200,7 +200,7 @@ export function CreateClient({ catalogTitles }: { catalogTitles: (Movie | Show)[
                 Mock timeline: drag handles are simulated with numeric inputs. Duration must be{" "}
                 {limits.minSeconds}–{limits.maxSeconds}s.
               </p>
-              <div className="rounded-xl border border-white/10 bg-black/40 p-4">
+              <div className="rounded-sm border border-white/10 bg-black/40 p-4">
                 <div className="relative h-3 w-full rounded-full bg-white/10">
                   <div
                     className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-[#0047AB] to-[#00FFFF]"
@@ -282,7 +282,7 @@ export function CreateClient({ catalogTitles }: { catalogTitles: (Movie | Show)[
           {session.step === 4 && (
             <div className="space-y-4 text-sm text-[var(--muted-foreground)]">
               <h3 className="font-heading text-lg text-white">Preview settings</h3>
-              <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+              <div className="rounded-sm border border-white/10 bg-white/5 p-4">
                 <p>
                   <span className="text-white">Source:</span> {selected?.title ?? "—"}
                 </p>
@@ -295,7 +295,7 @@ export function CreateClient({ catalogTitles }: { catalogTitles: (Movie | Show)[
                   <span className="text-white">Prompt:</span> {session.prompt.text || "—"}
                 </p>
               </div>
-              <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-4 text-amber-100">
+              <div className="rounded-sm border border-amber-500/30 bg-amber-500/10 p-4 text-amber-100">
                 <strong className="text-white">Moderation</strong>: Clips must comply with
                 community guidelines. No unlawful or unlicensed material.
               </div>
@@ -324,7 +324,7 @@ export function CreateClient({ catalogTitles }: { catalogTitles: (Movie | Show)[
                 <p className="text-destructive">{session.errorMessage}</p>
               )}
               {session.status === "success" && (
-                <div className="rounded-xl border border-[var(--electric-aqua)]/40 bg-black/30 p-4">
+                <div className="rounded-sm border border-[var(--electric-aqua)]/40 bg-black/30 p-4">
                   <p className="font-medium text-white">Preview ready</p>
                   <p className="mt-2 text-sm text-[var(--muted-foreground)]">
                     Simulated clip ID: {session.generatedClipId}

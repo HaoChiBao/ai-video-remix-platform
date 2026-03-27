@@ -9,9 +9,16 @@ type HomeContentProps = {
   featured: Movie | Show | null;
   trending: (Movie | Show)[];
   communityPicks: (Movie | Show)[];
+  /** TMDB recommendations (popular movie + popular TV seeds). */
+  recommendations: (Movie | Show)[];
 };
 
-export function HomeContent({ featured, trending, communityPicks }: HomeContentProps) {
+export function HomeContent({
+  featured,
+  trending,
+  communityPicks,
+  recommendations,
+}: HomeContentProps) {
   const because =
     featured != null
       ? trending.filter((t) => t.id !== featured.id).slice(0, 8)
@@ -28,6 +35,23 @@ export function HomeContent({ featured, trending, communityPicks }: HomeContentP
           description="Connect the API server and set TMDB_API_KEY so /api/home can load titles."
         />
       )}
+
+      {recommendations.length > 0 ? (
+        <section>
+          <SectionHeader
+            title="Recommended for you"
+            subtitle="From TMDB recommendations (based on popular picks)."
+            href="/browse"
+          />
+          <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0 [scrollbar-width:thin]">
+            {recommendations.map((item) => (
+              <div key={item.id} className="w-[160px] shrink-0 sm:w-[180px]">
+                <PosterCard item={item} />
+              </div>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <section>
         <SectionHeader title="Trending now" href="/browse" />

@@ -58,7 +58,7 @@ export function TvEpisodePicker({
   return (
     <div
       className={cn(
-        "rounded-xl border border-white/10 bg-card/40 p-4 backdrop-blur-sm sm:p-5",
+        "rounded-sm border border-white/20 bg-card/40 p-4 backdrop-blur-sm sm:p-5",
         className,
       )}
     >

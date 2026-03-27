@@ -33,12 +33,12 @@ export function MainNav() {
     cn(
       "rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
       pathname === href || (href !== "/" && pathname.startsWith(href))
-        ? "bg-white/10 text-white"
-        : "text-[var(--muted-foreground)] hover:bg-white/5 hover:text-white",
+        ? "bg-[#0047ab]/35 text-white border border-white/15"
+        : "text-[var(--muted-foreground)] hover:bg-white/[0.06] hover:text-white",
     );
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#002060]/85 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-white/20 bg-black/90 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.12)] backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-[1400px] items-center gap-4 px-4 sm:px-6">
         <Link
           href="/"
@@ -69,7 +69,7 @@ export function MainNav() {
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder="Search titles, genres…"
-              className="h-10 border-white/15 bg-white/5 pl-10 text-white placeholder:text-[var(--muted-foreground)]"
+              className="h-10 border-white/25 bg-black/40 pl-10 text-white placeholder:text-[var(--muted-foreground)]"
               aria-label="Search"
             />
           </div>
@@ -93,7 +93,7 @@ export function MainNav() {
           </SheetTrigger>
           <SheetContent
             side="right"
-            className="border-white/10 bg-[#061a4a] text-white w-[min(100%,320px)]"
+            className="border-white/20 bg-[#050505] text-white w-[min(100%,320px)]"
           >
             <SheetHeader>
               <SheetTitle className="text-left font-heading">Menu</SheetTitle>

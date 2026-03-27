@@ -9,7 +9,7 @@ import {
   useState,
 } from "react";
 
-const STORAGE_KEY = "cobalt-stream-watchlist";
+const STORAGE_KEY = "wtfdidiwatch-watchlist";
 
 type WatchlistContextValue = {
   ids: Set<string>;

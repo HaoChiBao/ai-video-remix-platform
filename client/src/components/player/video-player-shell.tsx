@@ -55,20 +55,20 @@ export function VideoPlayerShell({
     return (
       <div
         className={cn(
-          "relative overflow-hidden rounded-xl border border-white/10 bg-black shadow-2xl shadow-[#0047AB]/20",
+          "relative overflow-hidden rounded-sm border border-white/20 bg-black shadow-lg shadow-[#0047AB]/25",
           className,
         )}
       >
         <div className="relative aspect-video w-full">
           {/*
-            Sandbox: omit allow-popups / allow-popups-to-escape-sandbox to reduce ad popups.
-            If playback breaks, remove the sandbox attribute or add tokens the embed requires.
+            No `sandbox` on the Vidking iframe: a locked-down sandbox blocks popups/modals the
+            player uses and breaks playback. CORS errors between Vidking and third-party stream
+            hosts are controlled by those servers, not this app.
           */}
           <iframe
             title={`Watch ${title}`}
             src={embedUrl}
-            className="absolute inset-0 h-full w-full rounded-xl border-0"
-            sandbox="allow-scripts allow-same-origin allow-forms allow-presentation allowfullscreen"
+            className="absolute inset-0 h-full w-full rounded-sm border-0"
             allow="fullscreen; autoplay; encrypted-media; picture-in-picture; accelerometer; gyroscope"
             allowFullScreen
             loading="lazy"
@@ -82,7 +82,7 @@ export function VideoPlayerShell({
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-xl border border-white/10 bg-black shadow-2xl shadow-[#0047AB]/20",
+        "relative overflow-hidden rounded-sm border border-white/20 bg-black shadow-lg shadow-[#0047AB]/25",
         className,
       )}
     >

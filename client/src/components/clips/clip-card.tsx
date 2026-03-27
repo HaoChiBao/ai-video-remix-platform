@@ -35,7 +35,7 @@ export function ClipCard({ clip, className }: ClipCardProps) {
     >
       <Link
         href={`/clips/${clip.id}`}
-        className="block overflow-hidden rounded-xl border border-white/10 bg-card/80 shadow-md outline-none ring-offset-2 ring-offset-[#002060] transition hover:border-[var(--electric-aqua)]/40 focus-visible:ring-2 focus-visible:ring-[var(--electric-aqua)]"
+        className="block overflow-hidden rounded-sm border border-white/20 bg-card/80 shadow-md outline-none ring-offset-2 ring-offset-black transition hover:border-[var(--electric-aqua)]/50 focus-visible:ring-2 focus-visible:ring-[var(--electric-aqua)]"
       >
         <div className="relative aspect-video w-full overflow-hidden">
           <Image

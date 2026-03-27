@@ -46,7 +46,7 @@ export function ProfileClient() {
   return (
     <div className="mx-auto max-w-[1200px] px-4 py-8 sm:px-6">
       <PageHeader title="Profile" description="Your watch activity and preferences." />
-      <div className="mb-10 flex flex-col gap-6 rounded-2xl border border-white/10 bg-card/40 p-6 md:flex-row md:items-center">
+      <div className="mb-10 flex flex-col gap-6 rounded-sm border border-white/20 bg-card/40 p-6 md:flex-row md:items-center">
         <Avatar className="size-24 border-2 border-[var(--electric-aqua)]/40">
           <AvatarFallback className="text-lg">You</AvatarFallback>
         </Avatar>
@@ -115,7 +115,7 @@ export function ProfileClient() {
 
         <TabsContent value="prefs">
           <div className="grid gap-6 md:grid-cols-2">
-            <Card className="border-white/10 bg-[#0a2760]/60">
+            <Card className="border-white/20 bg-card/50">
               <CardHeader>
                 <CardTitle className="font-heading text-lg text-white">Playback</CardTitle>
               </CardHeader>
@@ -131,7 +131,7 @@ export function ProfileClient() {
                 </div>
               </CardContent>
             </Card>
-            <Card className="border-white/10 bg-[#0a2760]/60">
+            <Card className="border-white/20 bg-card/50">
               <CardHeader>
                 <CardTitle className="font-heading text-lg text-white">Community</CardTitle>
               </CardHeader>

@@ -8,7 +8,7 @@
  * | `NEXT_PUBLIC_API_URL` | **Browser** (client components) and fallback for the Next.js server. Must be a full origin (no trailing slash). Inlined at **build time** — redeploy after changing. |
  * | `API_URL` | **Next.js server only** (Server Components, `generateMetadata`, etc.). Use when the server should call a different host than the browser (e.g. Docker service name `http://api:8080` vs public `https://api.example.com`). If unset, `NEXT_PUBLIC_API_URL` is used. |
  *
- * All JSON API traffic (`/api/home`, `/api/details/...`, search, episodes, etc.) goes through
+ * All JSON API traffic (`/api/home`, `/api/details/...`, `/api/search/...`, `/api/discover/...`, episodes, etc.) goes through
  * {@link getApiBaseUrl} → `apiFetch` / `apiGet` in `http.ts`.
  */
 
