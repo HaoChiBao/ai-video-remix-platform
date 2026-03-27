@@ -17,20 +17,8 @@ const nextConfig: NextConfig = {
       "@radix-ui/react-tooltip",
     ],
   },
-  webpack: (config, { dev }) => {
-    if (dev) {
-      config.watchOptions = {
-        ...config.watchOptions,
-        ignored: [
-          "**/node_modules/**",
-          "**/.git/**",
-          "**/.next/**",
-        ],
-        aggregateTimeout: 300,
-      };
-    }
-    return config;
-  },
+  // Do not add a custom `webpack` handler here: Next 15+ production builds default to
+  // Turbopack and error if `webpack` is set without a `turbopack` config (Vercel).
   images: {
     remotePatterns: [
       {
