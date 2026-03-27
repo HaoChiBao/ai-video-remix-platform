@@ -3,6 +3,9 @@ import { CreateClient } from "./create-client";
 import { Skeleton } from "@/components/ui/skeleton";
 import { browsePoolFromHome, fetchHomeCatalog } from "@/lib/api/home-service";
 
+/** Avoid build-time fetch to the API (unreachable or slow during Vercel build → 60s timeout). */
+export const dynamic = "force-dynamic";
+
 async function CreatePageInner() {
   const home = await fetchHomeCatalog();
   const catalogTitles = home ? browsePoolFromHome(home) : [];

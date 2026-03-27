@@ -1,6 +1,9 @@
 import { HomeContent } from "./home-content";
 import { browsePoolFromHome, catalogFromHome, fetchHomeCatalog } from "@/lib/api/home-service";
 
+/** Home loads TMDB data via the API; do not block `next build` on that network call. */
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const home = await fetchHomeCatalog();
 
