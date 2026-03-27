@@ -67,6 +67,7 @@ export function VideoPlayerShell({
           */}
           <iframe
             title={`Watch ${title}`}
+            sandbox="allow-scripts allow-forms allow-same-origin"
             src={embedUrl}
             className="absolute inset-0 h-full w-full rounded-sm border-0"
             allow="fullscreen; autoplay; encrypted-media; picture-in-picture; accelerometer; gyroscope"
